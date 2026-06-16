@@ -13,6 +13,26 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
+// ===== Theme Toggle =====
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const body = document.body;
+
+// Check saved preference
+const savedTheme = localStorage.getItem('rd-profile-theme');
+if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+}
+
+themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('rd-profile-theme', next);
+    themeIcon.textContent = next === 'light' ? '☀️' : '🌙';
+});
+
 // ===== Navbar scroll effect =====
 const navbar = document.getElementById('navbar');
 let lastScroll = 0;
